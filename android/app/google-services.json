@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1001623261003",
+    "project_id": "emailauth-35097",
+    "storage_bucket": "emailauth-35097.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001623261003:android:e7045dd0848836e254e2ce",
+        "android_client_info": {
+          "package_name": "com.loginui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTI5psKCP-KObVvt5uk0mkpzT2IcKnHh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
