@@ -1,0 +1,1 @@
+Implemented Twitter login , Github Login and Email and Password based authentication using firebase.

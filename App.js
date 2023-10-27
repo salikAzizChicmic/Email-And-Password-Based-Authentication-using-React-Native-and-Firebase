@@ -4,6 +4,7 @@ import Register from './src/components/Register'
 import Dashboard from './src/components/Dashboard'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
+import UserView from './src/components/UserView'
 
 const Stack=createNativeStackNavigator();
 const App = () => {
@@ -13,8 +14,8 @@ const App = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="UserView" component={UserView} />
       </Stack.Navigator>
-
     </NavigationContainer>
   )
 }

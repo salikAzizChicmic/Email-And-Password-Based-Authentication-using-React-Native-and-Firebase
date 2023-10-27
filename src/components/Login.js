@@ -3,12 +3,13 @@ import { Image, Text,TextInput,TouchableOpacity,View } from 'react-native'
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
+
 const Login = () => {
     const[email,setEmail]=useState("")
     const[password,setPassword]=useState("")
     useEffect(()=>{
         if(auth().currentUser){
-            navigation.navigate("Dashboard")
+            navigation.navigate("UserView")
         }
     },[])
     const navigation=useNavigation()
@@ -16,7 +17,7 @@ const Login = () => {
         try {
             auth().signInWithEmailAndPassword(email, password).then((res)=>{
                 console.log(res)
-                navigation.navigate("Dashboard")
+                navigation.navigate("UserView")
             }).catch((err)=>{
                 console.log(err)
             })
