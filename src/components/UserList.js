@@ -4,11 +4,15 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { firebase } from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 
+var ct=0
 const UserList = ({name,email,uid}) => {
-  const [allMsg,setAllMsg]=useState(null)
+  const [allMsg,setAllMsg]=useState([])
+  const [time,setTime]=useState("")
   const navigation=useNavigation();
   const handleNavigate=()=>{
+    navigation.popToTop()
     navigation.navigate("Dashboard",{name:name,uid:uid})
+    
   }
 
   const readData=()=>{
@@ -18,11 +22,14 @@ const UserList = ({name,email,uid}) => {
       .ref(path)
       .once('value')
   .then(snapshot => {
-    //console.log(Object.values(snapshot.val()))
-    var p=Object.keys(snapshot.val()) ; p.sort(); 
+    console.log(Object.values(snapshot.val()))
+    var p=Object.keys(snapshot.val()) ; p.sort()
+    let last=new Date(parseInt(p[p.length-1]))
+    console.log(last.toString())
+    setTime(`${last.getHours()}:${last.getMinutes()}`)
     var q=p.map((val1)=>{return snapshot.val()[val1]})
+
     setAllMsg(q)
-    
   })
   }
 
@@ -40,7 +47,7 @@ const UserList = ({name,email,uid}) => {
             <Text style={{marginTop:20,fontSize:20,fontWeight:'bold',color:'black'}}>{name}</Text>
             <Text style={{maxWidth:250}}>{allMsg!==null ?allMsg[allMsg.length-1]:"Demo Message"}</Text>
         </View>
-
+        <Text style={{position:'absolute',marginLeft:'90%',marginTop:'5%'}}>{time}</Text>
     </View>
         <View style={{height:1,width:'100%',backgroundColor:'lightgrey'}} />
     </TouchableOpacity>
