@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Text, View ,TouchableOpacity, Image, ScrollView, TextInput, KeyboardAvoidingView} from 'react-native'
+import { Text, View ,TouchableOpacity, Image, ScrollView, TextInput} from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import auth from '@react-native-firebase/auth';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Message from './Message';
@@ -72,6 +73,8 @@ const Dashboard = () => {
     navigation.navigate("UserView")
   }
 
+
+
   
   useEffect(()=>{
       readData()
@@ -109,14 +112,14 @@ const Dashboard = () => {
             }) }
             
         </ScrollView>
-        
-        <View style={{position:'absolute',marginTop:"190%",backgroundColor:'white',marginHorizontal:10,borderRadius:10,marginVertical:5,flexDirection:'row'}}>
+        <KeyboardAwareScrollView style={{position:'absolute',marginTop:"190%"}}>
+        <View style={{backgroundColor:'white',marginHorizontal:10,borderRadius:10,marginVertical:5,flexDirection:'row'}}>
           <TextInput style={{width:"92%"}} value={msgText} onChangeText={(text)=>setMessage(text)} placeholder='Enter message to send' />
           <TouchableOpacity  onPress={handleSend}>
               <Image style={{height:25,width:25,objectFit:'fill',marginVertical:'40%'}} source={require('../Assets/send.png')} />
           </TouchableOpacity>
         </View>
-    
+        </KeyboardAwareScrollView>
     </View>
     
   )

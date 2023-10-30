@@ -39,7 +39,6 @@ const UserList = ({name,email,uid}) => {
   return (
     <TouchableOpacity onPress={handleNavigate}>
     <View style={{height:1,width:'100%',backgroundColor:'lightgrey'}} />
-
     <View style={{backgroundColor:'white',flexDirection:'row'}}>
         <Image style={{height:100,width:100,borderRadius:50,marginVertical:10,marginHorizontal:5}} source={{uri:'https://randomuser.me/api/portraits/thumb/men/20.jpg'}} />
 

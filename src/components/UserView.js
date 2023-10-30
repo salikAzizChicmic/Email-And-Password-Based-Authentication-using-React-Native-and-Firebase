@@ -5,13 +5,16 @@ import database from '@react-native-firebase/database';
 import { firebase } from '@react-native-firebase/auth';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { style } from './UserViewStyle';
 
 var ct=0;
 const UserView = () => {
   const[user,setAllUser]=useState([])
+  const[curuser,setCurUser]=useState([])
+  const[searchText,setSearchText]=useState("")
   const navigation=useNavigation()
- 
-  useEffect(()=>{
+
+  const getData=()=>{
     const path='/user/'
     
   const reference = firebase.app()
@@ -32,18 +35,47 @@ const UserView = () => {
       }
     }
     setAllUser(arr)
-    console.log(arr)
+    setCurUser(arr)
+    //console.log(arr)
   });
+  }
+ 
+  useEffect(()=>{
+    getData()
   },[])
+
+  const handleSearch=(text)=>{
+    setSearchText(text);
+    console.log(user)
+    if(searchText.trim().length>0){
+      const temp=curuser.filter((ele)=>ele.name.includes(searchText))
+      setAllUser(temp)
+    }else{
+      setAllUser(user)
+    }
+    
+    
+  }
+
+  const handleSearch1=()=>{
+    if(searchText.trim().length>0){
+      const temp=curuser.filter((ele)=>ele.name.includes(searchText))
+      setAllUser(temp)
+    }else{
+      setAllUser(user)
+    }
+    
+    
+  }
       
   return (
     <View>
-        <View style={{flexDirection:'row',backgroundColor:'white',marginVertical:10,marginHorizontal:10,borderRadius:10}}>
-            <TextInput style={{width:'85%'}} placeholder='Enter your requirements' />
-            <Image style={{height:"50%",width:"7%",marginVertical:10}} source={require('../Assets/search.png')} />
+        <View style={style.box}>
+            <TextInput onChange={handleSearch1} onChangeText={(text)=>setSearchText(text)} style={style.searchInp} placeholder='Enter your requirements' />
+            <Image style={style.searchImg} source={require('../Assets/search.png')} />
         </View>
-        <View style={{width:'100%' ,height:1,backgroundColor:'lightgrey',marginBottom:10}} />
-        <ScrollView style={{height:700}}>
+        <View style={style.borderView} />
+        <ScrollView style={style.scrl}>
             {user && user.map((ele)=>{
               return <UserList key={ct++} uid={ele.uid} name={ele.name} email={ele.email} />
             }) }
